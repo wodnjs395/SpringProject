@@ -10,6 +10,6 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/qutotation/*")
 @AllArgsConstructor
-public class quotationContoller {
+public class QuotationContoller {
 
 }

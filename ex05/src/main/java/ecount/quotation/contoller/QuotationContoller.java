@@ -8,7 +8,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/qutotation/*")
+@RequestMapping("/quotation/*")
 @AllArgsConstructor
 public class QuotationContoller {
 

@@ -9,7 +9,7 @@ public class ShppingStorage {
 	private int storageId;
 	private String storageName;
 	private String addres;
-	private Timestamp created_at;
-	private Timestamp modified_at;
+	private Timestamp created_at; // sysdate
+	private Timestamp modified_at; // sysdate
 	private Timestamp deleted_at;
 }

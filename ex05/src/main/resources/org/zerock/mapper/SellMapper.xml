@@ -5,21 +5,15 @@
 <mapper namespace="ecount.sell.mapper.SellMapper">
 
 	<select id="getList" resultType="ecount.sell.domain.Sell">
-		select * from tbl_reply where rno = #{rno}
+		select * from sell where order by created_at desc
 	</select>
+	
+	
 	<select id="getProductList" resultType="ecount.common.domain.ProductList">
 		select * from tbl_reply where rno = #{rno}
 	</select>
 	
-	<!-- <delete id="delete">
-		delete from tbl_reply where rno = #{rno}
-	</delete>
-	
-	<update id="update">
-		update tbl_reply set reply = #{reply}, updatedate = sysdate where rno = #{rno}
-	</update>
-	
-	<select id="getListWithPaging" resultType="org.zerock.domain.ReplyVO">
+<!-- 	<select id="getListWithPaging" resultType="org.zerock.domain.ReplyVO">
 		<![CDATA[
 		select rno, bno, reply, replyer, replydate, updatedate
 		from
@@ -33,13 +27,8 @@
 		) where rn > (#{cri.pageNum} - 1) * #{cri.amount}
 		]]>
 		
-	</select>
-	
-	<select id="getCountByBno" resultType="int">
-	<![CDATA[
-		select count(rno) from tbl_reply where bno = #{bno}
-	]]>
 	</select> -->
+
 	
 	
 </mapper>

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 public class ProductList {
+	
 	private int ProductNum;
 	private String uuid;
 	private int productcode2;

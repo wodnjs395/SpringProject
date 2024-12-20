@@ -21,8 +21,6 @@ public class Sell {
 	Timestamp modified_at;
 	Timestamp deleted_at;
 
-	
-	List<ProductList> productList;
 }
 
 

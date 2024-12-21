@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ecount.sell.mapper.ProductsMapper">
+
+	<select id="getProductList" resultType="ecount.common.domain.ProductList">
+		select pl.productnum, pl.uuid, pl.productcode2, p.name, p.unitprice pl.numberofitem, pl.comment, pl.created_at, pl.modified_at
+		from products p, productlist pl
+		where p.productcode2 = pl.productcode
+		
+	</select>
+	
+<!-- 	<select id="getListWithPaging" resultType="org.zerock.domain.ReplyVO">
+		<![CDATA[
+		select rno, bno, reply, replyer, replydate, updatedate
+		from
+		(
+			select /*+INDEX(tbl_reply idx_reply) */
+			rownum rn, rno, bno, reply, replyer, replydate, updatedate 
+			from tbl_reply 
+			where bno = #{bno}
+			and rno > 0
+			and rownum <= #{cri.pageNum} * #{cri.amount}
+		) where rn > (#{cri.pageNum} - 1) * #{cri.amount}
+		]]>
+		
+	</select> -->
+
+	
+	
+</mapper>

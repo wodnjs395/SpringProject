@@ -15,8 +15,8 @@ public class QuotationDTO {
 	private int acc_number; // 해당 날짜의 만들어진 순번 
 	private int clientNum;
 	private int storageId;
-	private int projectNum; // 0 - 결제중 1 - 진행중 2 - 완료  
-	private String status;
+	private int projectNum; 
+	private String status; // 0 - 결제중 1 - 진행중 2 - 완료  
 	private Timestamp created_at; // sysdate
 	private Timestamp modified_at; // sysdate
 	private Timestamp deleted_at; // 해당값이 존재하면 검색 X

@@ -14,5 +14,5 @@ public interface QuotationMapper {
 
 	int updateQuot(QuotationDTO quot);
 
-	int deleteQuot(Long accNum);
+	int deleteQuot(QuotationDTO quot); // 데이터를 삭제하지 않고 deleted_at 부여
 }

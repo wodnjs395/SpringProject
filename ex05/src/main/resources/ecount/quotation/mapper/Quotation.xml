@@ -3,16 +3,56 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ecount.quotation.mapper.QuotationMapper">
+
 	<select id="findQuotByAccNum"
 		resultType="ecount.quotation.domain.QuotationDTO">
-SELECT 
-	* 
-FROM
-	Quotation
-WHERE
-	deleted_at IS NULL
-AND
-	acc_number = #{acc_number} 
+		SELECT
+			*
+		FROM
+			Quotation
+		WHERE
+			deleted_at IS NULL
+		AND
+			acc_number = #{acc_number}
 	</select>
 
+	<select id="findAllQuot"
+		resultType="ecount.quotation.domain.QuotationDTO">
+		SELECT
+			*
+		FROM
+			Quotation
+		WHERE
+			acc_number > 0
+	</select>
+	
+	<insert id="insertQuot">
+		INSERT INTO 
+			Quotation (acc_uuid, acc_number, clientNum, storageId,
+	 			  projectNum, status, created_at, modified_at, deleted_at)
+		VALUES (#{acc_uuid}, #{acc_number}, #{clientNum}, #{storageId},
+	 			  #{projectNum}, #{status}, sysdate, #{modified_at}, #{deleted_at})
+	
+	</insert>
+	
+	<update id="updateQuot">
+	
+		UPDATE
+			Quotation 
+		SET
+			clientNum = #{clientNum}
+			storageId = #{storageId}
+			projectNum = #{projectNum} 
+			status = #{status}
+			modified_at = sysdate
+			
+	</update>	
+	
+	<update id="deleteQuot">
+		UPDATE
+			Quotation 
+		SET
+			deleted_at = sysdate
+	</update>
+	
 </mapper>

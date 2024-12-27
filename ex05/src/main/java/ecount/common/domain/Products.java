@@ -10,7 +10,10 @@ public class Products {
 	
 	private int productcode;
 	private String name;
-	private int price;
+	private int unitprice;
+	private int numberOfItem;
+	private String memo;
 	private Timestamp created_at;
 	private Timestamp modified_at;
+	private Timestamp delete_at;
 }

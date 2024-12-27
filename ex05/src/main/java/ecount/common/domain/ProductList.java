@@ -11,10 +11,5 @@ import lombok.NoArgsConstructor;
 public class ProductList {
 	
 	private int ProductNum;
-	private String uuid;
-	private int productcode2;
-	private int numberOfItem;
-	private String comment;
-	private Timestamp created_at;
-	private Timestamp deleted_at;
+	
 }

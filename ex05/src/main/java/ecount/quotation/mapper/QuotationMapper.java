@@ -8,7 +8,7 @@ public interface QuotationMapper {
 
 	List<QuotationDTO> findAllQuot(); // 다중 조회
 
-	QuotationDTO findQuotByAccNum(); // 단일 조회
+	QuotationDTO findQuotByAccNum(Long acc_number); // 단일 조회
 
 	int insertQuot(QuotationDTO quot);
 

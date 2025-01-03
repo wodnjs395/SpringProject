@@ -1,7 +1,12 @@
 package ecount.quotation.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ecount.quotation.domain.QuotationDTO;
+import ecount.quotation.mapper.QuotationMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -9,5 +14,33 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @Log4j
 public class QuotationServiceImpl implements QuotationService {
+	
+	@Autowired
+	private final QuotationMapper mapper;
+	
+	@Override
+	public void register(QuotationDTO quot) {
+		mapper.insertQuot(quot);
+	}
+
+	@Override
+	public QuotationDTO read(Long acc_number) {
+		return mapper.findQuotByAccNum(acc_number);
+	}
+
+	@Override
+	public boolean modify(QuotationDTO quot) {
+		return false;
+	}
+
+	@Override
+	public boolean remove(QuotationDTO quot) {
+		return false;
+	}
+
+	@Override
+	public List<QuotationDTO> getList() {
+		return mapper.findAllQuot();
+	}
 
 }

@@ -11,6 +11,19 @@
 		
 	</select>
 	
+	
+	<select id="getProductItemPriceAndcount" resultType="ecount.sell.domain.ProductItemPrice">
+		select m.uuid, m.productnum, count(pm.productcode) as count, sum(p.numberofitem*p.unitprice) as total_price
+		from sell s
+    		JOIN 
+        		mappingtable m ON s.acc_uuid = m.uuid
+    		JOIN 
+        		product_mapping pm ON m.productnum = pm.productnum
+    		JOIN 
+        		products p ON pm.productcode = p.productcode  
+		group by  m.uuid, m.productnum, s.acc_uuid;
+	</select>
+	
 <!-- 	<select id="getListWithPaging" resultType="org.zerock.domain.ReplyVO">
 		<![CDATA[
 		select rno, bno, reply, replyer, replydate, updatedate

@@ -41,24 +41,21 @@
 	</bean>
 
 	<tx:annotation-driven />
-
-	<mybatis-spring:scan
-		base-package="org.zerock.mapper" />
 		
-	<mybatis-spring:scan
-		base-package="ecount" />
-
-	<context:component-scan
-		base-package="org.zerock.service"></context:component-scan>
-
-	<context:component-scan
-		base-package="org.zerock.aop"></context:component-scan>
 	
-	<context:component-scan 
-		base-package="org.zerock.task"></context:component-scan>
+	<mybatis-spring:scan
+		base-package="ecount.sell.mapper" />
+	
+	<mybatis-spring:scan
+		base-package="ecount.quotation.mapper" />
+
+	<context:component-scan
+		base-package="ecount.sell.service"></context:component-scan>
+
+	<context:component-scan
+		base-package="ecount.quotation.service"></context:component-scan>
+
 		
-	<context:component-scan 
-		base-package="ecount"></context:component-scan>
 	
 	<task:annotation-driven/>
 

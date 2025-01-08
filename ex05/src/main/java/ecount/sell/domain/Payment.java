@@ -8,12 +8,12 @@ import lombok.Data;
 
 @Data
 public class Payment {
-	String pay_uuid;
-	String acc_uuid;
-	Date payreqdate;
-	int amount;
-	int paytype;
-	int status;
-	Timestamp created_at;
-	Timestamp modified_at;
+	private String pay_uuid;
+	private String acc_uuid;
+	private Date payreqdate;
+	private int amount;
+	private int paytype;
+	private int status;
+	private Timestamp created_at;
+	private Timestamp modified_at;
 }

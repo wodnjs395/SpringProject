@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ecount.sell.mapper.ProductsMapper">
+	
+	<!-- 판매데이터의 품목 목록 데이터 가져오기 -->
+
+	<select id="getProductList" resultType="ecount.common.domain.ProductList">
+		select pl.productnum, pl.uuid, pl.productcode2, p.name, p.unitprice pl.numberofitem, pl.comment, pl.created_at, pl.modified_at
+		from products p, productlist pl
+		where p.productcode2 = pl.productcode
+	</select>
+	
+	<!-- 1개의 sell 데이터와 연관된 product데이터들 조회 -->
+	<select id="getOneOfSellProducts" resultType="ecount.sell.domain.ProductItemPrice">
+		<![CDATA[
+		select m.uuid, 
+        		m.productnum, 
+        		(
+        		select p.name from products p 
+        		where productcode = 
+        			(select spm.productcode from product_mapping spm where spm.productnum = m.productnum and rownum =1)
+        		)as first_product,
+        
+        		count(pm.productcode) as count ,
+        		sum(p.numberofitem*p.unitprice) as total_price 
+		FROM sell s
+    	JOIN 
+        	mappingtable m ON s.acc_uuid = m.uuid
+    	JOIN 
+        	product_mapping pm ON m.productnum = pm.productnum
+    	JOIN 
+        	products p ON pm.productcode = p.productcode  
+		group by  m.uuid, m.productnum, s.acc_uuid
+		]]>
+	</select>
+	
+	<!-- 판매조회에 표시할 품목 전체 데이터 조회 -->
+	<select id="getProductItemPriceAndcount" resultType="ecount.sell.domain.ProductItemPrice">
+		select m.uuid, m.productnum, count(pm.productcode) as count, sum(p.numberofitem*p.unitprice) as total_price
+		from sell s
+    		JOIN 
+        		mappingtable m ON s.acc_uuid = m.uuid
+    		JOIN 
+        		product_mapping pm ON m.productnum = pm.productnum
+    		JOIN 
+        		products p ON pm.productcode = p.productcode  
+		group by  m.uuid, m.productnum, s.acc_uuid;
+	</select>
+	
+	<!-- 판매조회 표시할 품목목록 페이징 -->
+	<select id="getPagingProudcts"
+			resultType="ecount.sell.domain.ProductItemPrice">
+		<![CDATA[
+			select *
+				from
+				(            
+            	select /*+INDEX_DESC(sell pk_sell) */
+					rownum rn, m.uuid as uuid, m.productnum as productnum, count(pm.productcode) as total_count, sum(p.numberofitem*p.unitprice) as total_price
+				from sell s
+                	JOIN 
+                    	mappingtable m ON s.acc_uuid = m.uuid
+                	JOIN 
+                    	product_mapping pm ON m.productnum = pm.productnum
+                	JOIN 
+                    	products p ON pm.productcode = p.productcode
+					where
+					rownum <= #{pageNum} * #{amount}
+				group by  rownum, m.uuid, m.productnum, s.acc_uuid
+				)
+				where rn > (#{pageNum} - 1) * #{amount}
+			]]>
+	</select>
+	
+	
+	
+	
+</mapper>

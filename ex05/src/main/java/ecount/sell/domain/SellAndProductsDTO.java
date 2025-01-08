@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class SellAndProductsDTO {
-	private Sell sell;
+	private SellVO sell;
 	private ProductItemPrice pi;
 	
 

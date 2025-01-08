@@ -12,8 +12,9 @@ import lombok.AllArgsConstructor;
 public class QuotationDTO {
 
 	private String acc_uuid;
-	private int acc_number; // 해당 날짜의 만들어진 순번 
+	private int acc_num; // 해당 날짜의 만들어진 순번 
 	private int clientNum;
+	private int managerNum;
 	private int storageId;
 	private int projectNum; 
 	private String status; // 0 - 결제중 1 - 진행중 2 - 완료  

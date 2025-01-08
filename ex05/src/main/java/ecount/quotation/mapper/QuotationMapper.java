@@ -2,8 +2,11 @@ package ecount.quotation.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import ecount.quotation.domain.QuotationDTO;
 
+@Mapper
 public interface QuotationMapper {
 
 	List<QuotationDTO> findAllQuot(); // 다중 조회

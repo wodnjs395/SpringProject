@@ -5,12 +5,11 @@
 <mapper namespace="ecount.quotation.mapper.QuotationMapper">
 
     <!-- 특정 견적서 검색 -->
-	<select id="findQuotByAccNum"
-		resultType="ecount.quotation.domain.QuotationDTO">
+	<select id="findQuotByAccNum" resultType="ecount.quotation.domain.QuotationDTO">
 		SELECT
 			*
 		FROM
-			Quotation
+			QUOTATION
 		WHERE
 			deleted_at IS NULL
 		AND
@@ -23,32 +22,33 @@
 		SELECT
 			*
 		FROM
-			Quotation
+			QUOTATION
 		WHERE
 			acc_number > 0
 	</select>
 	
     <!-- 견적서 삽입 -->
-	<insert id="insertQuot">
+	<insert id="insertQuot"
+		parameterType="ecount.quotation.domain.QuotationDTO">
 		INSERT INTO 
-			Quotation (acc_uuid, acc_number, clientNum, storageId,
-	 			  projectNum, status, created_at, modified_at, deleted_at)
-		VALUES (#{acc_uuid}, #{acc_number}, #{clientNum}, #{storageId},
-	 			  #{projectNum}, #{status}, sysdate, #{modified_at}, NULL)
-	
+			Quotation (acc_uuid, acc_num, clientNum, managerNum, storageId,
+	 			  projectNum, status, created_at, modified_at)
+		VALUES (#{acc_uuid}, #{acc_num}, #{clientNum}, #{managerNum}, #{storageId},
+	 			  #{projectNum}, #{status}, #{created_at}, #{modified_at})
 	</insert>
 	
     <!-- 견적서 업데이트 -->
 	<update id="updateQuot">
 	
 		UPDATE
-			Quotation 
+			QUOTATION 
 		SET
 			clientNum = #{clientNum},
+			managerNum = #{managerNum},
 			storageId = #{storageId},
 			projectNum = #{projectNum}, 
 			status = #{status},
-			modified_at = sysdate
+			modified_at = #{modified_at}
 		WHERE
     		acc_number = #{acc_number}
 			

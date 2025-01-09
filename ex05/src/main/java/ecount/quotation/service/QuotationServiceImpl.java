@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j;
 public class QuotationServiceImpl implements QuotationService {
 	
 	@Autowired
-	private final QuotationMapper mapper;
+	private QuotationMapper mapper;
 	
 	@Override
 	public void register(QuotationDTO quot) {

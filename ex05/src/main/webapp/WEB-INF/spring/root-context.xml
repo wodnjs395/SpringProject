@@ -43,27 +43,15 @@
 	<tx:annotation-driven />
 
 	<mybatis-spring:scan
-		base-package="org.zerock.mapper" />
-		
-	<mybatis-spring:scan
-		base-package="ecount" />
+      base-package="ecount.quotation.mapper" />
 
 	<context:component-scan
-		base-package="org.zerock.service"></context:component-scan>
+		base-package="ecount.quotation.service" />
 
-	<context:component-scan
-		base-package="org.zerock.aop"></context:component-scan>
-	
-	<context:component-scan 
-		base-package="org.zerock.task"></context:component-scan>
-		
-	<context:component-scan 
-		base-package="ecount"></context:component-scan>
-	
-	<task:annotation-driven/>
+
+	<task:annotation-driven />
 
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	
-	
+
 </beans>
 

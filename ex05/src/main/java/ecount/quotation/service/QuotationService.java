@@ -8,7 +8,7 @@ public interface QuotationService {
 	
 	public void register(QuotationDTO quot);
 	
-	public QuotationDTO read(Long acc_number);
+	public QuotationDTO get(int acc_num);
 	
 	public boolean modify(QuotationDTO quot);
 	

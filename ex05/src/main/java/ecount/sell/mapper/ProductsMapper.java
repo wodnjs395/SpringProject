@@ -14,9 +14,12 @@ public interface ProductsMapper {
 	
 	public List<ProductItemPrice> getOneOfSellProducts();
 	
-	public List<ProductItemPrice> getProductItemPriceAndcount();
 
 	public List<ProductItemPrice> getPagingProudcts(Criteria cri);
+	
+//	테스트용
+	public List<ProductItemPrice> getProductItemPriceAndcount();
+	
 	
 	
 

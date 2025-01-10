@@ -33,5 +33,11 @@ public class SellMapperTests {
 		pmapper.getPagingProudcts(cri).forEach(product -> log.info(product));
 	}
 	
+	
+	@Test
+	public void testGetProduct2() {
+		pmapper.getProductItemPriceAndcount().forEach(pro -> log.info(pro));
+	}
+	
 
 }

@@ -36,9 +36,40 @@
 		]]>
 	</select>
 	
+	
+	<!-- 판매조회 표시할 품목목록 페이징 -->
+	<select id="getPagingProudcts"
+			resultType="ecount.sell.domain.ProductItemPrice">
+		<![CDATA[
+			select * 
+				from (
+    				select to_char(m.uuid), 
+        			to_char(m.productnum), 
+        			to_char((
+            			select p.name from products p 
+        				where productcode = 
+                	(select spm.productcode from product_mapping spm where spm.productnum = m.productnum and rownum =1)
+        			))as first_product,
+        			to_char(count(pm.productcode)) as count ,
+        			to_char(sum(p.numberofitem*p.unitprice)) as total_price,
+					to_char(s.created_at) as created_at
+        			FROM sell s
+    				JOIN 
+        				mappingtable m ON s.acc_uuid = m.uuid
+    				JOIN 
+        				product_mapping pm ON m.productnum = pm.productnum
+    				JOIN 
+        				products p ON pm.productcode = p.productcode
+					group by  m.uuid, m.productnum, s.created_at
+        			order by created_at
+        			)
+        			where rownum <= #{pageNum} * #{amount} and rownum >= (#{pageNum} - 1) * #{amount}
+			]]>
+	</select>
+	<!-- ========================================================테스트 쿼리문=======================================================================-->
 	<!-- 판매조회에 표시할 품목 전체 데이터 조회 -->
 	<select id="getProductItemPriceAndcount" resultType="ecount.sell.domain.ProductItemPrice">
-		select m.uuid, m.productnum, count(pm.productcode) as count, sum(p.numberofitem*p.unitprice) as total_price
+		select to_char(rownum) as rn,to_char(m.uuid) as uuid, to_char(m.productnum), to_char(count(pm.productcode)) as total_count, to_char(sum(p.numberofitem*p.unitprice)) as total_price
 		from sell s
     		JOIN 
         		mappingtable m ON s.acc_uuid = m.uuid
@@ -46,10 +77,10 @@
         		product_mapping pm ON m.productnum = pm.productnum
     		JOIN 
         		products p ON pm.productcode = p.productcode  
-		group by  m.uuid, m.productnum, s.acc_uuid;
+		group by rownum, m.uuid, m.productnum
 	</select>
 	
-	<!-- 판매조회 표시할 품목목록 페이징 -->
+<!--  판매조회 표시할 품목목록 페이징 
 	<select id="getPagingProudcts"
 			resultType="ecount.sell.domain.ProductItemPrice">
 		<![CDATA[
@@ -57,7 +88,7 @@
 				from
 				(            
             	select /*+INDEX_DESC(sell pk_sell) */
-					rownum rn, m.uuid as uuid, m.productnum as productnum, count(pm.productcode) as total_count, sum(p.numberofitem*p.unitprice) as total_price
+					to_char(rownum) rn, to_char(m.uuid) as uuid, to_char(m.productnum) as productnum, to_char(count(pm.productcode)) as total_count, to_char(sum(p.numberofitem*p.unitprice)) as total_price
 				from sell s
                 	JOIN 
                     	mappingtable m ON s.acc_uuid = m.uuid
@@ -71,8 +102,9 @@
 				)
 				where rn > (#{pageNum} - 1) * #{amount}
 			]]>
-	</select>
+	</select> 
 	
+	 -->
 	
 	
 	

@@ -11,9 +11,9 @@
 		FROM
 			QUOTATION
 		WHERE
-			deleted_at IS NULL
+			delete_at IS NULL
 		AND
-			acc_number = #{acc_number}
+			acc_num = #{acc_num}
 	</select>
 
     <!-- 모든 견적서 검색 -->
@@ -24,7 +24,7 @@
 		FROM
 			QUOTATION
 		WHERE
-			acc_number > 0
+			acc_num > 0
 	</select>
 	
     <!-- 견적서 삽입 -->
@@ -50,7 +50,7 @@
 			status = #{status},
 			modified_at = #{modified_at}
 		WHERE
-    		acc_number = #{acc_number}
+    		acc_num = #{acc_num}
 			
 	</update>	
 	
@@ -59,9 +59,9 @@
 		UPDATE
 			Quotation 
 		SET
-			deleted_at = sysdate
+			deleted_at = sysdate <!-- sysdate 말고 다른거? -->
 		WHERE
-    		acc_number = #{acc_number}
+    		acc_num = #{acc_num}
 	</update>
 	
 </mapper>

@@ -17,5 +17,5 @@ public interface QuotationMapper {
 
 	int updateQuot(QuotationDTO quot);
 
-	int deleteQuot(QuotationDTO quot); // 데이터를 삭제하지 않고 deleted_at 부여
+	int deleteQuot(QuotationDTO quot); // 데이터를 삭제하지 않고 delete_at 칼럼에 값 입력만
 }

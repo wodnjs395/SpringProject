@@ -46,8 +46,7 @@
       base-package="ecount.quotation.mapper" />
 
 	<context:component-scan
-		base-package="ecount.quotation.service" />
-
+		base-package="ecount.quotation" />
 
 	<task:annotation-driven />
 

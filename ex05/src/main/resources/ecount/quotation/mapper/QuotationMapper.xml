@@ -59,7 +59,7 @@
 		UPDATE
 			Quotation 
 		SET
-			deleted_at = sysdate <!-- sysdate 말고 다른거? -->
+			deleted_at = sysdate <!-- sysdate 말고 다른거 사용해야함-->
 		WHERE
     		acc_num = #{acc_num}
 	</update>

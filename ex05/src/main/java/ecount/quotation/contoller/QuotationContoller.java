@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ecount.quotation.domain.QuotationDTO;
 import ecount.quotation.service.QuotationService;
@@ -44,4 +45,9 @@ public class QuotationContoller {
 		model.addAttribute("quot", service.get(acc_num));
 	}
 
+	@PostMapping("/modify")
+	public String modify(@RequestBody QuotationDTO quot) {
+		service.modify(quot);
+		return "redirect:/quotation/list";
+	}
 }

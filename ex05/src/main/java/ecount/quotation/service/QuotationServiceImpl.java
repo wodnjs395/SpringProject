@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ecount.quotation.domain.QuotationDTO;
 import ecount.quotation.mapper.QuotationMapper;
@@ -14,11 +15,12 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @Log4j
 public class QuotationServiceImpl implements QuotationService {
-	
+
 	@Autowired
 	private QuotationMapper mapper;
-	
+
 	@Override
+	@Transactional
 	public void register(QuotationDTO quot) {
 		mapper.insertQuot(quot);
 	}
@@ -29,8 +31,12 @@ public class QuotationServiceImpl implements QuotationService {
 	}
 
 	@Override
+	@Transactional
 	public boolean modify(QuotationDTO quot) {
-		return false;
+		
+		boolean modifyResult = mapper.updateQuot(quot) == 1;
+
+		return modifyResult;
 	}
 
 	@Override

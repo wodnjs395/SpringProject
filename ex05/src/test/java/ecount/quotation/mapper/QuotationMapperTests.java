@@ -1,5 +1,6 @@
 package ecount.quotation.mapper;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -86,28 +87,36 @@ public class QuotationMapperTests {
 		quot.setModified_at(LocalDateTime.now());
 		quot.setDeleted_at(null);
 
-		// 객체 생성하는 부분마다 JavaTimeModule 등록해야함
+		// <중요> 객체 생성하는 부분마다 JavaTimeModule 등록해야함 - Java8에서는 LocalDateTime 지원 X
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.registerModule(new JavaTimeModule());
 
 		mockMvc.perform(post("/quotation/register").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(quot))).andExpect(status().isOk());
 	}
-	
+
 	public void ControllerGetTest() throws Exception {
-		log.info(mockMvc.perform(MockMvcRequestBuilders
-				.get("/quotation/get")
-				.param("acc_num", "99"))
-				.andReturn()
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/quotation/get").param("acc_num", "99")).andReturn()
 				.getModelAndView().getModelMap());
 	}
-	
-	@Test
+
 	public void ControllerGetListTest() throws Exception {
-		log.info(
-				mockMvc.perform(MockMvcRequestBuilders.get("/quotation/list"))
-				.andReturn()
-				.getModelAndView()
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/quotation/list")).andReturn().getModelAndView()
 				.getModelMap());
+	}
+
+	@Test
+	public void ContollerUpdateTest() throws Exception {
+// 나머지 값을들 어떻게 바꿀것인지 생각해야함
+		QuotationDTO quot = mapper.findQuotByAccNum(99);
+
+		quot.setModified_at(LocalDateTime.now());
+
+		// <중요> 객체 생성하는 부분마다 JavaTimeModule 등록해야함 - Java8에서는 LocalDateTime 지원 X
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.registerModule(new JavaTimeModule());
+
+		log.info(mockMvc.perform(MockMvcRequestBuilders.post("/quotation/modify")
+				.contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(quot))));
 	}
 }

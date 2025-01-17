@@ -43,16 +43,17 @@
 		<![CDATA[
 			select * 
 				from (
-    				select to_char(m.uuid), 
-        			to_char(m.productnum), 
-        			to_char((
+    				select 
+    				m.uuid as uuid, 
+        			m.productnum as productnum, 
+        			(
             			select p.name from products p 
         				where productcode = 
                 	(select spm.productcode from product_mapping spm where spm.productnum = m.productnum and rownum =1)
-        			))as first_product,
-        			to_char(count(pm.productcode)) as count ,
-        			to_char(sum(p.numberofitem*p.unitprice)) as total_price,
-					to_char(s.created_at) as created_at
+        			)as first_product,
+        			count(pm.productcode) as total_count ,
+        			sum(p.numberofitem*p.unitprice) as total_price,
+					s.created_at as created_at
         			FROM sell s
     				JOIN 
         				mappingtable m ON s.acc_uuid = m.uuid
@@ -69,7 +70,7 @@
 	<!-- ========================================================테스트 쿼리문=======================================================================-->
 	<!-- 판매조회에 표시할 품목 전체 데이터 조회 -->
 	<select id="getProductItemPriceAndcount" resultType="ecount.sell.domain.ProductItemPrice">
-		select to_char(rownum) as rn,to_char(m.uuid) as uuid, to_char(m.productnum), to_char(count(pm.productcode)) as total_count, to_char(sum(p.numberofitem*p.unitprice)) as total_price
+		select m.uuid as uuid, m.productnum, count(pm.productcode) as total_count, sum(p.numberofitem*p.unitprice) as total_price
 		from sell s
     		JOIN 
         		mappingtable m ON s.acc_uuid = m.uuid

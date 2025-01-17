@@ -1,9 +1,8 @@
 package ecount.sell.domain;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Date;
 
-import ecount.common.domain.ProductList;
 import lombok.Data;
 
 @Data
@@ -17,9 +16,9 @@ public class SellVO {
 	private int salestype;
 	private int type;	
 	private int status;
-	private Timestamp created_at;
-	private Timestamp modified_at;
-	private Timestamp deleted_at;
+	private Date created_at;
+	private Date modified_at;
+	private Date deleted_at;
 
 }
 

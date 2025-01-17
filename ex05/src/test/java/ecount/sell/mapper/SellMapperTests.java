@@ -26,6 +26,13 @@ public class SellMapperTests {
 		mapper.getList().forEach(sell -> log.info(sell));
 	}
 	
+	@Test
+	public void testGetListPageing() {
+		Criteria cri = new Criteria(1,10);
+		mapper.getListWithPaging(cri).forEach(sellList -> log.info(sellList));
+	}
+
+	
 	
 	@Test
 	public void testGetProduct() {

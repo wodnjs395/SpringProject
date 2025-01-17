@@ -1,6 +1,6 @@
 package ecount.sell.domain;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,11 +8,11 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProductItemPrice {
-	private String rn;
 	private String uuid;
-	private String productnum;
-	private String total_count;
-	private String total_price;
-	private Timestamp created_at;
+	private int productnum;
+	private String first_product;
+	private int total_count;
+	private int total_price;
+	private Date created_at;
 
 }

@@ -21,12 +21,15 @@ public class SellController {
 	
 	
 	
-	@GetMapping("/list")
+	@GetMapping("/sellList")
 	public void list(Criteria cri, Model model) {
 		
 		model.addAttribute("list", service.getList(cri));
 		
 		int total = service.getTotal(cri);
+		
+		log.info("total: " + total);
+		
 		
 		model.addAttribute("pageMaker", new PageDTO(total, cri));
 		

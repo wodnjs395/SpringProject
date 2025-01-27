@@ -46,7 +46,7 @@ public class SellControllerTests {
 	
 	@Test
 	public void testListPaging() throws Exception{
-		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/sell/list")
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/sell/sellList")
 				.param("pageNum", "1")
 				.param("amount", "10"))
 				.andReturn().getModelAndView().getModelMap());

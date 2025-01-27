@@ -38,11 +38,14 @@ public class SellServiceImpl implements SellService{
 		pList = pmapper.getPagingProudcts(cri);
 		for(int i = 0; i < sList.size(); i++) {
 			for(int j=0;j < pList.size(); j++) {
-				if(sList.get(i).getAcc_uuid().equals(pList.get(j).getUuid())) {}
-				SellAndProductsDTO temp = new SellAndProductsDTO(sList.get(i),pList.get(j));
-				spList.add(temp);
+				if(sList.get(i).getAcc_uuid().equals(pList.get(j).getUuid())) {
+					SellAndProductsDTO temp = new SellAndProductsDTO(sList.get(i),pList.get(j));
+					spList.add(temp);
+				}
 			}
 		}
+		
+		
 		return spList;
 	}
 

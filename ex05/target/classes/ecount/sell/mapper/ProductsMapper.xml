@@ -51,7 +51,7 @@
         				where productcode = 
                 	(select spm.productcode from product_mapping spm where spm.productnum = m.productnum and rownum =1)
         			)as first_product,
-        			count(pm.productcode) as total_count ,
+        			count(pm.productcode) as total_count,
         			sum(p.numberofitem*p.unitprice) as total_price,
 					s.created_at as created_at
         			FROM sell s

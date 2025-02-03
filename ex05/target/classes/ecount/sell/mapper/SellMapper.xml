@@ -31,22 +31,26 @@
 	<select id="getListWithPaging"
 			resultType="ecount.sell.domain.SellVO">
 		<![CDATA[
-			select
-				*
+			select *
 			from
-				(
-				select /*+INDEX_DESC(sell pk_sell) */
-					rownum rn, sell.acc_uuid, sell.acc_num, 
-					clientnum, managernum, storageid, projectnum, 
-					salestype, type, status, created_at, modified_at, deleted_at
-				from
-					sell
-				where
-				rownum <= #{pageNum} * #{amount}
+    			(
+       				select /*+INDEX_DESC(sell pk_sell) */
+            			rownum rn, s.acc_uuid, s.acc_num, 
+						c.name as clientname, m.name as managername, ss.storagename as storagename, p.name as projectname, 
+						s.salestype, s.type, s.status, s.created_at, s.modified_at, s.deleted_at
+					from
+            			sell s
+        			join client c on c.clientnum = s.clientnum
+        			join manager m on m.managernum = s.managernum
+        			join shippingstorage ss on ss.storageid = s.storageid
+        			join project p on p.projectnum = s.projectnum
+					where
+						rownum <= #{pageNum} * #{amount}
 				)
 			where rn > (#{pageNum} - 1) * #{amount}
 			]]>
 	</select>
+	
 	
 	
 	<select id="getTotalCount" resultType="int">

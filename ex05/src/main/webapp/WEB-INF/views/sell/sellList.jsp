@@ -88,12 +88,12 @@ th {
 			<c:forEach items="${list}" var="sellList">
 				<tr>
 					<td><c:out value="${sellList.sell.acc_uuid}" /></td>
-					<td><c:out value="${sellList.dateNo}" /></td>
-					<td><c:out value="${sellList.sell.clientnum}" /></td>
+					<td><c:out value="${sellList.date_num}" /></td>
+					<td><c:out value="${sellList.sell.clientname}" /></td>
 					<td><c:out value="${sellList.productSummary}" /></td>
-					<td><c:out value="${sellList.pi.total_price}" /></td>
-					<td><c:out value="${sellList.sell.status}" /></td>
-					<td><c:out value="${sellList.sell.storageid}" /></td>
+					<td><c:out value="${sellList.total_price}" /></td>
+					<td><c:out value="${sellList.salestype}" /></td>
+					<td><c:out value="${sellList.sell.storagename}" /></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -131,4 +131,11 @@ th {
 		</div>
 	</div>
 </body>
+
+<script>
+	function formatMoney(amount) {
+    	return amount.toLocaleString('en-US'); 
+	}
+
+</script>
 </html>

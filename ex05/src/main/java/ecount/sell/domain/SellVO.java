@@ -9,10 +9,10 @@ import lombok.Data;
 public class SellVO {
 	private  String acc_uuid;
 	private int acc_num;
-	private int clientnum;
-	private int managerNum;
-	private int storageid;
-	private int projectnum;
+	private String clientname;
+	private String managername;
+	private String storagename;
+	private String projectname;
 	private int salestype;
 	private int type;	
 	private int status;

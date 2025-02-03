@@ -1,8 +1,7 @@
 package ecount.sell.domain;
 
-import java.util.List;
+import java.text.DecimalFormat;
 
-import ecount.common.domain.ProductList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,9 +10,11 @@ import lombok.Data;
 public class SellAndProductsDTO {
 	private SellVO sell;
 	private ProductItemPrice pi;
+	private String date_num;
 	private String dateNo;
 	private String productSummary;
 	private String salestype;
+	private String total_price;
 	
 
 	public SellAndProductsDTO(SellVO sell, ProductItemPrice pi) {
@@ -27,8 +28,19 @@ public class SellAndProductsDTO {
 			productSummary = pi.getFirst_product();			
 			}
 		
-		salestype = String.valueOf(sell.getSalestype());
+		date_num = String.valueOf(sell.getCreated_at()) +"-"+ sell.getAcc_num();	
+//		salestype = String.valueOf(sell.getSalestype());
+		switch (sell.getSalestype()) {
+		case 1:
+			this.salestype = "부가세율 적용";
+		case 2:
+			this.salestype = "부가세율 미적용";
+		}
+		DecimalFormat df = new DecimalFormat("###,###");
+		total_price = df.format(pi.getTotal_price());
+		
 	}
+	
 	
 	
 	
